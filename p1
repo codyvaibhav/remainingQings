@@ -12,3 +12,34 @@ GALAXY S26 ULTRA	Input	Ratio									0.01	0.02	0.03	0.03
 GALAXY S26 ULTRA	Lock up	Ratio									0.00	0.00	0.00	0.00
 
 how to plot line graph with months as on x axis and their ratio on y axis.  i want to plot this using plotly express on python give code pycharm
+
+# --- 2. Identify month columns (everything that isn't an ID column) ---
+id_cols = ["Spec1", "Symptom Group"]
+month_cols = [c for c in df.columns if c not in id_cols]
+
+# --- 3. Reshape wide -> long format ---
+df_long = df.melt(
+    id_vars=id_cols,
+    value_vars=month_cols,
+    var_name="Month",
+    value_name="Ratio"
+)
+
+# --- 4. Drop rows with missing ratios (optional) ---
+df_long = df_long.dropna(subset=["Ratio"])
+
+# --- 5. Plot ---
+fig = px.line(
+    df_long,
+    x="Month",
+    y="Ratio",
+    color="Symptom Group",   # one line per symptom group
+    markers=True,
+    title="Symptom Ratio by Month — GALAXY S26 ULTRA"
+)
+
+fig.update_layout(
+    xaxis_title="Month",
+    yaxis_title="Ratio",
+    legend_title="Symptom Group"
+)
