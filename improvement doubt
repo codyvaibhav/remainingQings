@@ -1,1 +1,3 @@
 in my improvement page, i dont want for every model same. i want it dynamic initially empty improvement data for that model. when the user add details through the for, the data gets appended to the exisiting one somewhere. remember i cant use external data storage clouds. can be excel or something else. write and generate new code for the improvement pages
+
+change the look of the ui. it should not look like a normal one, it should be appealing. set accordingly make changes in the code properly and give new corrected file(s)
