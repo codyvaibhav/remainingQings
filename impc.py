@@ -452,9 +452,12 @@ def show():
     else:
         cards_html = '<div class="imp-card-grid">'
         for i, entry in enumerate(filtered, start=1):
-            cards_html += _render_card(entry, i)
-        cards_html += "</div>"
-        st.markdown(cards_html, unsafe_allow_html=True)
+              card = _render_card(entry, i)
+              # Strip newlines so the markdown parser doesn't break the HTML block
+              card = card.replace("\n", " ")
+              cards_html += card
+    cards_html += "</div>"
+    st.markdown(cards_html, unsafe_allow_html=True)       
 
     # ── Export ───────────────────────────────────────────────────────────────
     if data:
